@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { X, Plus, Settings } from 'lucide-react'
+import { Trash2, Plus, Settings } from 'lucide-react'
 import { usePreferencesStore } from '@/stores/preferences-store'
 import PersonalRecords from './personal-records'
 
@@ -117,7 +117,7 @@ function PreferencesPanel() {
                         value={newEquipment}
                         onChange={(e) => setNewEquipment(e.target.value)}
                         onKeyPress={handleKeyPress}
-                        placeholder="e.g., bodyweight, dumbbells, barbell"
+                        placeholder="e.g., bodyweight, dumbbells, etc"
                         className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                     <button
@@ -139,15 +139,15 @@ function PreferencesPanel() {
                             {equipment.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-2"
+                                    className="flex w-full justify-between items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-2"
                                 >
                                     <span className="text-gray-900 dark:text-white">{item}</span>
                                     <button
                                         onClick={() => removeEquipment(item)}
-                                        className="text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 transition-colors rounded-none"
+                                        className="bg-red-500 text-white transition-colors rounded-none"
                                         title="Remove"
                                     >
-                                        <X className="w-4 h-4" />
+                                        <Trash2 className="w-4 h-4" />
                                     </button>
                                 </div>
                             ))}

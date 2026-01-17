@@ -129,7 +129,7 @@ function WorkoutForm({ workoutToEdit, onSave }) {
 
             {/* Exercise List */}
             <div className="space-y-4">
-                <h4 className="text-lg font-medium text-gray-900 dark:text-white">
+                <h4 className="text-lg font-medium">
                     Exercises ({exercises.length})
                 </h4>
 
@@ -144,7 +144,7 @@ function WorkoutForm({ workoutToEdit, onSave }) {
                                     <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
                                         ({exercise.reps} reps × {exercise.sets} sets)
                                         {exercise.isBodyweight && (
-                                            <span className="ml-2 text-purple-600 dark:text-purple-400 font-medium">
+                                            <span className="ml-2 text-primary font-medium">
                                                 • Bodyweight
                                             </span>
                                         )}
@@ -152,7 +152,7 @@ function WorkoutForm({ workoutToEdit, onSave }) {
                                 </div>
                                 <button
                                     onClick={() => removeExercise(exercise.id)}
-                                    className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 rounded-none"
+                                    className="text-white bg-red-500 rounded-none"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -165,12 +165,12 @@ function WorkoutForm({ workoutToEdit, onSave }) {
             {/* Add Exercise Form */}
             <div className="space-y-4 border-t pt-4">
                 <div className="flex items-center justify-between">
-                    <h4 className="text-lg font-medium text-gray-900 dark:text-white">
+                    <h4 className="text-lg font-medium">
                         Add Exercise
                     </h4>
                     <button
                         onClick={() => setIsAISidebarOpen(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-none text-white font-medium transition-colors"
+                        className="flex rounded-none items-center gap-2 px-4 py-2 border border-primary bg-white text-primary font-medium transition-colors"
                     >
                         <Sparkles className="w-4 h-4" />
                         AI Generate
@@ -232,7 +232,7 @@ function WorkoutForm({ workoutToEdit, onSave }) {
 
                 <button
                     onClick={addExercise}
-                    className="w-full px-4 py-2 rounded-none bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors"
+                    className="w-full px-4 py-2 rounded-none border border-primary bg-white text-primary font-medium transition-colors"
                 >
                     Add Exercise
                 </button>

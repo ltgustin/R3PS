@@ -48,7 +48,7 @@ function WorkoutList({ onStartWorkout }) {
 
             {workouts.length === 0 ? (
                 <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border-2 border-dashed border-gray-200 dark:border-gray-700">
-                    <Dumbbell className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                    <Dumbbell className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500 dark:text-gray-400 font-medium mb-2">
                         No workouts saved yet
                     </p>
@@ -71,7 +71,7 @@ function WorkoutList({ onStartWorkout }) {
                                     </h4>
                                 </div>
                                 <div className="flex items-center gap-2 mb-4">
-                                    <Dumbbell className="w-4 h-4 text-purple-600 dark:text-secondary-100" />
+                                    <Dumbbell className="w-4 h-4 text-primary dark:text-secondary-100" />
                                     <span className="text-sm text-gray-600 dark:text-secondary-100">
                                         {totalExercises} {totalExercises === 1 ? 'exercise' : 'exercises'}
                                     </span>

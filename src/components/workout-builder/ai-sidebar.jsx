@@ -91,12 +91,12 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                     {/* Sidebar Header */}
                     <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                         <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
-                            <Sparkles className="w-6 h-6 text-purple-500" />
+                            <Sparkles className="w-6 h-6 text-primary" />
                             AI Workout Generator
                         </h2>
                         <button
                             onClick={onClose}
-                            className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                            className="p-2 text-gray-200 transition-colors rounded-md"
                             title="Close"
                         >
                             <X className="w-5 h-5" />
@@ -114,7 +114,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                 onChange={(e) => setAiPrompt(e.target.value)}
                                 placeholder="e.g., upper body strength workout for beginners, chest and triceps focused workout, full body strength training"
                                 rows={4}
-                                className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                                className="w-full border border-gray-300 dark:border-gray-600 px-4 py-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                                 disabled={isGenerating}
                             />
 
@@ -128,7 +128,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                         <button
                                             type="button"
                                             onClick={selectAllEquipment}
-                                            className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
+                                            className="text-xs border border-primary text-primary bg-white px-4 py-2 rounded-none"
                                         >
                                             {selectedEquipment.length === equipment.length ? 'Deselect All' : 'Select All'}
                                         </button>
@@ -137,9 +137,9 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                         {equipment.map((item) => (
                                             <label
                                                 key={item}
-                                                className={`flex items-center gap-2 px-3 py-2 rounded-md border cursor-pointer transition-colors ${
+                                                className={`flex items-center gap-2 px-3 py-2 rounded-none border cursor-pointer transition-colors ${
                                                     selectedEquipment.includes(item)
-                                                        ? 'bg-purple-100 dark:bg-purple-900/30 border-purple-500 dark:border-purple-400'
+                                                        ? 'bg-primary-100 dark:bg-primary-900/30 border-primary-500 dark:border-primary-400'
                                                         : 'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
                                                 }`}
                                             >
@@ -165,7 +165,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                             <button
                                 type="submit"
                                 disabled={!aiPrompt.trim() || isGenerating}
-                                className="mt-3 w-full bg-purple-500 text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="mt-3 w-full bg-primary text-white px-6 py-3 rounded-none hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isGenerating ? (
                                     <>
@@ -183,7 +183,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
 
                         {/* Error Message */}
                         {aiError && (
-                            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
                                 <p className="text-red-800 dark:text-red-300 text-sm whitespace-pre-line">{aiError}</p>
                             </div>
                         )}
@@ -197,7 +197,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                     </h3>
                                     <button
                                         onClick={handleAddAll}
-                                        className="text-sm bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors flex items-center gap-2"
+                                        className="text-sm border border-primary bg-white text-primary px-4 py-2 rounded-none hover:bg-primary-100 transition-colors flex items-center gap-2"
                                     >
                                         <Plus className="w-4 h-4" />
                                         Add All
@@ -207,7 +207,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                     {aiSuggestions.map((exercise, index) => (
                                         <li
                                             key={index}
-                                            className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600"
+                                            className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-none border border-gray-200 dark:border-gray-600"
                                         >
                                             <div className="flex-1">
                                                 <span className="text-gray-800 dark:text-white font-medium">{exercise.name}</span>
@@ -217,7 +217,7 @@ function AISidebar({ isOpen, onClose, onAddExercise, onAddAllExercises }) {
                                             </div>
                                             <button
                                                 onClick={() => handleAddSuggestion(exercise)}
-                                                className="p-2 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-md transition-colors"
+                                                className="p-2 text-white bg-primary rounded-none transition-colors"
                                                 title="Add to workout"
                                             >
                                                 <Plus className="w-5 h-5" />

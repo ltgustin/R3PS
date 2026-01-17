@@ -23,7 +23,7 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen pb-10 bg-gray-50 dark:bg-secondary">
+    <div className="min-h-screen pb-10 bg-secondary-50 dark:bg-secondary">
       <Header />
 
       <Routes>

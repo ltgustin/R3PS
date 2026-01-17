@@ -3,13 +3,14 @@ import { persist } from 'zustand/middleware';
 
 export const usePreferencesStore = create(
     persist(
-        (set) => ({
+        (set, get) => ({
             // State
             isDarkMode: false,
             defaultReps: 8,
             defaultSets: 3,
             equipment: [], // Array of equipment items
             personalRecords: [], // Array of PR objects: { id, exerciseName, weight, reps, date }
+            lastSplashShown: null, // ISO timestamp of when splash was last shown
 
             //Actions
             toggleDarkMode: () => {
@@ -82,6 +83,26 @@ export const usePreferencesStore = create(
                 set((state) => ({
                     personalRecords: state.personalRecords.filter(pr => pr.id !== id)
                 }))
+            },
+
+            // Splash screen tracking
+            setLastSplashShown: () => {
+                set({
+                    lastSplashShown: new Date().toISOString()
+                })
+            },
+
+            shouldShowSplash: () => {
+                const state = get()
+                if (!state.lastSplashShown) {
+                    return true // Never shown before
+                }
+                
+                const lastShown = new Date(state.lastSplashShown)
+                const now = new Date()
+                const daysSinceLastShown = (now - lastShown) / (1000 * 60 * 60 * 24)
+                
+                return daysSinceLastShown >= 30 // Show if 30+ days have passed
             },
         }),
         {

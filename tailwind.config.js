@@ -46,7 +46,7 @@ export default {
 					950: '#052e16',  // Darkest green (almost black with green tint)
 				},
 				secondary: {
-					50: '#e8ebf5',   // Very light blue-gray tint
+					50: '#D9E5FA',   // Very light blue-gray tint
 					100: '#d1d7eb',  // Light blue-gray
 					200: '#a3afe7',  // Lighter blue
 					300: '#7587e3',  // Light-medium blue

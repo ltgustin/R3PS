@@ -104,7 +104,7 @@ function PersonalRecords() {
                                 onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
                                 min="0"
                                 step="0.5"
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
                                 placeholder="150"
                             />
                         </div>
@@ -172,14 +172,14 @@ function PersonalRecords() {
                                     <div className="flex gap-2">
                                         <button
                                             onClick={() => handleEdit(pr)}
-                                            className="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                                            className="p-2 rounded-none bg-secondary text-white transition-colors"
                                             title="Edit PR"
                                         >
                                             <Edit className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => handleDelete(pr.id)}
-                                            className="p-2 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
+                                            className="p-2 rounded-none bg-red-500 text-white transition-colors"
                                             title="Delete PR"
                                         >
                                             <Trash2 className="w-4 h-4" />
