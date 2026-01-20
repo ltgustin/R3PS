@@ -5,7 +5,7 @@ import EditWorkoutModal from './edit-workout-modal'
 
 function WorkoutList({ onStartWorkout }) {
     // Get workouts and functions from store
-    const { workouts, setCurrentWorkout } = useWorkoutStore()
+    const { workouts, setCurrentWorkout, startSession } = useWorkoutStore()
     
     // Modal state
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -14,6 +14,7 @@ function WorkoutList({ onStartWorkout }) {
     // Function to start a workout
     const startWorkout = (workout) => {
         setCurrentWorkout(workout)
+        startSession()
         // Navigate to workout session view if callback is provided
         if (onStartWorkout) {
             onStartWorkout()

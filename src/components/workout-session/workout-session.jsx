@@ -4,13 +4,28 @@ import { useWorkoutStore } from '@/stores/workout-store'
 import { Link, useNavigate } from 'react-router-dom'
 
 function WorkoutSession() {
-    const { currentWorkout, endSession, addWorkoutHistory } = useWorkoutStore()
+    const { currentWorkout, startedAt, endSession, addWorkoutHistory } = useWorkoutStore()
     const navigate = useNavigate()
 
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0)
     const [completedExercises, setCompletedExercises] = useState([])
     const [completedSets, setCompletedSets] = useState([])
 
+    // Initialize completed sets when exercise changes
+    useEffect(() => {
+        if (currentWorkout && currentExerciseIndex < currentWorkout.exercises.length) {
+            const exercise = currentWorkout.exercises[currentExerciseIndex]
+            const sets = Array.from({ length: exercise.sets }, (_, i) => ({
+                setNumber: i + 1,
+                reps: exercise.reps,
+                weight: exercise.isBodyweight ? 'bodyweight' : '',
+                completed: false
+            }))
+            setCompletedSets(sets)
+        }
+    }, [currentWorkout, currentExerciseIndex])
+
+    // Early return AFTER all hooks are called
     if (!currentWorkout) {
         return (
             <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border-2 border-dashed border-gray-200 dark:border-gray-700">
@@ -34,20 +49,6 @@ function WorkoutSession() {
 
     const currentExercise = currentWorkout.exercises[currentExerciseIndex]
     const isLastExercise = currentExerciseIndex === currentWorkout.exercises.length - 1
-
-    // Initialize completed sets when exercise changes
-    useEffect(() => {
-        if (currentWorkout && currentExerciseIndex < currentWorkout.exercises.length) {
-            const exercise = currentWorkout.exercises[currentExerciseIndex]
-            const sets = Array.from({ length: exercise.sets }, (_, i) => ({
-                setNumber: i + 1,
-                reps: exercise.reps,
-                weight: exercise.isBodyweight ? 'bodyweight' : '',
-                completed: false
-            }))
-            setCompletedSets(sets)
-        }
-    }, [currentWorkout, currentExerciseIndex])
 
     // Update set data
     const updateSet = (setIndex, field, value) => {
@@ -97,7 +98,8 @@ function WorkoutSession() {
             const workoutData = {
                 workoutId: currentWorkout.id,
                 workoutName: currentWorkout.name,
-                exercises: updatedCompletedExercises
+                exercises: updatedCompletedExercises,
+                startedAt: startedAt
             }
             addWorkoutHistory(workoutData)
             endSession()
@@ -125,7 +127,8 @@ function WorkoutSession() {
             const workoutData = {
                 workoutId: currentWorkout.id,
                 workoutName: currentWorkout.name,
-                exercises: updatedCompletedExercises
+                exercises: updatedCompletedExercises,
+                startedAt: startedAt
             }
             addWorkoutHistory(workoutData)
             endSession()

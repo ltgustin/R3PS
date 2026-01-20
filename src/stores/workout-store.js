@@ -33,6 +33,7 @@ export const useWorkoutStore = create(
             workouts: [],
             currentWorkout: null,
             isSessionActive: false,
+            startedAt: null, // Timestamp when workout session started
             workoutHistory: [], // Track completed workouts
 
             // Actions
@@ -68,25 +69,52 @@ export const useWorkoutStore = create(
 
             startSession: () => {
                 set({
-                    isSessionActive: true
+                    isSessionActive: true,
+                    startedAt: new Date().toISOString()
                 })
             },
 
             endSession: () => {
+                const state = get()
+                let duration = 0
+                
+                // Calculate duration if session was started
+                if (state.startedAt) {
+                    const startTime = new Date(state.startedAt)
+                    const endTime = new Date()
+                    duration = Math.floor((endTime - startTime) / 1000) // Duration in seconds
+                }
+                
                 set({
                     isSessionActive: false,
-                    currentWorkout: null
+                    currentWorkout: null,
+                    startedAt: null // Reset startedAt
                 })
+                
+                return duration // Return duration for use in addWorkoutHistory
             },
 
             // Add completed workout to history
             addWorkoutHistory: (workoutData) => {
+                const state = get()
+                const completedAt = new Date().toISOString()
+                let duration = 0
+                
+                // Calculate duration if startedAt is provided
+                if (workoutData.startedAt) {
+                    const startTime = new Date(workoutData.startedAt)
+                    const endTime = new Date(completedAt)
+                    duration = Math.floor((endTime - startTime) / 1000) // Duration in seconds
+                }
+                
                 const historyEntry = {
                     id: Date.now().toString(),
                     workoutId: workoutData.workoutId,
                     workoutName: workoutData.workoutName,
-                    completedAt: new Date().toISOString(),
-                    exercises: workoutData.exercises, // Array of completed exercises with sets
+                    startedAt: workoutData.startedAt || state.startedAt || completedAt,
+                    completedAt: completedAt,
+                    exercises: workoutData.exercises,
+                    duration: duration, // Duration in seconds
                 }
                 set((state) => ({
                     workoutHistory: [historyEntry, ...state.workoutHistory]

@@ -16,6 +16,22 @@ function HistoryPage() {
         })
     }
 
+    const formatDuration = (seconds) => {
+        if (!seconds || seconds === 0) return 'N/A'
+        
+        const hours = Math.floor(seconds / 3600)
+        const minutes = Math.floor((seconds % 3600) / 60)
+        const secs = seconds % 60
+        
+        if (hours > 0) {
+            return `${hours} ${hours === 1 ? 'hour' : 'hours'} ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`
+        } else if (minutes > 0) {
+            return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ${secs > 0 ? `${secs} ${secs === 1 ? 'second' : 'seconds'}` : ''}`
+        } else {
+            return `${secs} ${secs === 1 ? 'second' : 'seconds'}`
+        }
+    }
+
     return (
         <PageWrapper
             title="Workout History"
@@ -41,6 +57,11 @@ function HistoryPage() {
                                         <p className="text-sm text-gray-500 dark:text-gray-400">
                                             {formatDate(workout.completedAt)}
                                         </p>
+                                        {workout.duration && (
+                                            <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mt-1">
+                                                Duration: {formatDuration(workout.duration)}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
 
